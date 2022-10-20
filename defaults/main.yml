@@ -1,0 +1,56 @@
+---
+# defaults file for hardening
+hardening_template:
+  - task_name: Password length/age/expiration - login.defs
+    src: login.defs.j2
+    dest: /etc/login.defs
+    owner: root
+    group: root
+    mode: '0644'
+    backup: true
+    tags_var:
+      - logindefs
+  - task_name: Password must meet complexity requirements - system-auth/pam_cracklib
+    src: pwquality.conf.j2
+    dest: /etc/security/pwquality.conf
+    owner: root
+    group: root
+    mode: '0644'
+    tags_var:
+      - pamd
+  - task_name: Auto-logout after 5 min of inactivity
+    src: tmout.sh.j2
+    dest: /etc/profile.d/tmount.sh
+    owner: root
+    group: root
+    mode: '0644'
+    tags_var:
+      - set_tmout
+  - task_name: Access control in ssh and banner (Permitrootlogin /  sshd_config)
+    src: sshd_config.j2
+    dest: /etc/ssh/sshd_config
+    owner: root
+    group: root
+    mode: '0600'
+    backup: true
+    validate: "/usr/sbin/sshd -t -f %s"
+    tags_var:
+      - sshd
+  - task_name: Restrict root logins to system console
+    src: security.j2
+    dest: /etc/securitty
+    owner: root
+    group: root
+    mode: '0600'
+    backup: true
+    tags_var:
+      - securetty
+  - task_name: syslog configuration
+    src: rsyslog.conf.j2
+    dest: /etc/rsyslog.conf
+    owner: root
+    group: root
+    mode: '0644'
+    backup: true
+    tags_var:
+      - syslog

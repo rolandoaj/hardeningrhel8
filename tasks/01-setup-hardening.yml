@@ -1,0 +1,18 @@
+- name: disable immutable chattr -iR /etc/pam.d
+  shell: 'chattr -iR /etc/pam.d 2> /dev/null'
+  changed_when: false
+  register: chattr_res
+  failed_when: chattr_res.rc !=1 and chattr_res.rc !=0
+  tags:
+    - chattr-i-pamd
+
+- name: create files from templates
+  include_tasks:
+    file: 01-01-hd-template.yml
+#este variable viene de defaults main
+#el loop recorre lo que tiene hardening_template y le cambia el nombre de la variable a lc_template_setup_value
+  loop: "{{ hardening_template }}"
+  loop_control:
+    loop_var: lc_template_setup_value
+  when:
+    - hardening_template is defined
