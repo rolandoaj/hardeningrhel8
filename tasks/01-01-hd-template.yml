@@ -1,0 +1,76 @@
+---
+#loop control
+#lc_template_setup_value -> hardening_template defined in defaults/main
+
+- name: "Execute logindefs title template: {{ lc_template_setup_value.task_name}}"
+  include_tasks:
+    file: common/template-setup.yml
+    apply:
+      tags:
+        - logindefs
+  vars:
+    lc_template: "{{ lc_template_setup_value }}"
+  when: lc_template_setup_value.tags_var is search("logindefs")
+  tags:
+    - logindefs
+
+- name: "Execute pamd template title: {{ lc_template_setup_value.task_name}}"
+  include_tasks:
+    file: common/template-setup.yml
+    apply:
+      tags:
+        - pamd
+  vars:
+    lc_template: "{{ lc_template_setup_value }}"
+  when: lc_template_setup_value.tags_var is search("pamd")
+  tags:
+    - pamd
+
+- name: "Execute set_tmout template title: {{ lc_template_setup_value.task_name}}"
+  include_tasks:
+    file: common/template-setup.yml
+    apply:
+      tags:
+        - set_tmout
+  vars:
+    lc_template: "{{ lc_template_setup_value }}"
+  when: lc_template_setup_value.tags_var is search("set_tmout")
+  tags:
+    - set_tmout
+
+- name: "Execute sshd template title: {{ lc_template_setup_value.task_name}}"
+  include_tasks:
+    file: common/template-setup.yml
+    apply:
+      tags:
+        - sshd
+  vars:
+    lc_template: "{{ lc_template_setup_value }}"
+  when: lc_template_setup_value.tags_var is search("sshd")
+  tags:
+    - sshd
+
+- name: "Execute securetty template title: {{ lc_template_setup_value.task_name}}"
+  include_tasks:
+    file: common/template-setup.yml
+    apply:
+      tags:
+        - securetty
+  vars:
+    lc_template: "{{ lc_template_setup_value }}"
+  when: lc_template_setup_value.tags_var is search("securetty")
+  tags:
+    - securetty
+
+- name: "Execute syslog template title: {{ lc_template_setup_value.task_name}}"
+  include_tasks:
+    file: common/template-setup.yml
+    apply:
+      tags:
+        - syslog
+  vars:
+    lc_template: "{{ lc_template_setup_value }}"
+  when: lc_template_setup_value.tags_var is search("syslog")
+  tags:
+    - syslog
+

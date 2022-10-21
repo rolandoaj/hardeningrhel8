@@ -1,3 +1,5 @@
+---
+
 - name: disable immutable chattr -iR /etc/pam.d
   shell: 'chattr -iR /etc/pam.d 2> /dev/null'
   changed_when: false

@@ -20,6 +20,7 @@ hardening_template:
       - pamd
   - task_name: Auto-logout after 5 min of inactivity
     src: tmout.sh.j2
+    #falta
     dest: /etc/profile.d/tmount.sh
     owner: root
     group: root
@@ -38,6 +39,7 @@ hardening_template:
       - sshd
   - task_name: Restrict root logins to system console
     src: security.j2
+    #falta
     dest: /etc/securitty
     owner: root
     group: root
@@ -45,6 +47,7 @@ hardening_template:
     backup: true
     tags_var:
       - securetty
+  #por definir si editamos esto
   - task_name: syslog configuration
     src: rsyslog.conf.j2
     dest: /etc/rsyslog.conf
